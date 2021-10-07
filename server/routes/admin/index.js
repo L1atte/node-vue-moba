@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 14:04:00
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-07 21:29:47
+ * @LastEditTime: 2021-10-07 23:16:11
  * @FilePath: \server\routes\admin\index.js
  */
 module.exports = (app) => {
@@ -25,9 +25,9 @@ module.exports = (app) => {
 
 	// 获取分类列表
 	router.get("", async (req, res) => {
-		const queryOptions = {}
-		if (req.Model.modelName === 'Category') {
-			queryOptions.populate = 'parent'
+		const queryOptions = {};
+		if (req.Model.modelName === "Category") {
+			queryOptions.populate = "parent";
 		}
 		const items = await req.Model.find().setOptions(queryOptions).limit(10);
 		res.send(items);
@@ -46,9 +46,21 @@ module.exports = (app) => {
 			success: true,
 		});
 	});
-	app.use("/admin/api/rest/:resource",async (req, res, next) => {
-		const modelName = require('inflection').classify(req.params.resource) // 将路由参数转换成类名
-		req.Model = require(`../../models/${modelName}`)
-		next()
-	}, router);
+	app.use(
+		"/admin/api/rest/:resource",
+		async (req, res, next) => {
+			const modelName = require("inflection").classify(req.params.resource); // 将路由参数转换成类名
+			req.Model = require(`../../models/${modelName}`);
+			next();
+		},
+		router
+	);
+
+	const multer = require("multer");
+	const upload = multer({ dest: __dirname + "/../../uploads" }); // dirname表示绝对地址，在这里指当前admin文件夹所在路径
+	app.post("/admin/api/upload", upload.single("file"), async (req, res) => {
+		const file = req.file; // 这里req.file是中间件upload.single的作用结果，类似于上面的req.Model
+		file.url = `http://localhost:3000/uploads/${file.filename}`
+		res.send(file);
+	});
 };

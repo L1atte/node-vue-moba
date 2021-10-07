@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 12:56:11
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-07 22:34:10
+ * @LastEditTime: 2021-10-07 23:14:20
  * @FilePath: \admin\src\views\ItemEdit.vue
 -->
 <template>
@@ -54,12 +54,16 @@ export default {
   },
   data() {
     return {
-      model: {},
+      model: {
+        icon: "",
+      },
     };
   },
   methods: {
     afterUpload(res) {
       console.log(res);
+      this.$set(this.model, 'icon', res.url)
+      // this.model.icon = res.url
     },
     async save() {
       let res;

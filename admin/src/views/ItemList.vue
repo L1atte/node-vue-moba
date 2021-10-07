@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 15:11:49
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-07 22:28:43
+ * @LastEditTime: 2021-10-07 23:25:12
  * @FilePath: \admin\src\views\ItemList.vue
 -->
 <template>
@@ -11,6 +11,11 @@
     <el-table :data="items">
       <el-table-column label="ID" prop="_id" width="230px"></el-table-column>
       <el-table-column label="物品名称" prop="name"></el-table-column>
+      <el-table-column label="物品图标" prop="icon">
+        <template slot-scope="scope">
+          <img :src="scope.row.icon" style="heigth: 3rem">
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
           <el-button
