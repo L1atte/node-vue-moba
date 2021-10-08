@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 11:16:09
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-07 21:43:02
+ * @LastEditTime: 2021-10-08 22:23:23
  * @FilePath: \admin\src\router\index.js
  */
 import Vue from "vue";
@@ -41,6 +41,19 @@ const routes = [
 			{
 				path: "items/edit/:id",
 				component: () => import("../views/ItemEdit.vue"),
+				props: true,
+			},
+			{
+				path: "heroes/create",
+				component: () => import("../views/HeroEdit.vue"),
+			},
+			{
+				path: "heroes/list",
+				component: () => import("../views/HeroList.vue"),
+			},
+			{
+				path: "heroes/edit/:id",
+				component: () => import("../views/HeroEdit.vue"),
 				props: true,
 			},
 		],
