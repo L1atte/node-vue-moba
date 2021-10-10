@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 15:11:49
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-08 22:51:25
+ * @LastEditTime: 2021-10-10 22:27:35
  * @FilePath: \admin\src\views\HeroList.vue
 -->
 <template>
@@ -11,6 +11,7 @@
     <el-table :data="items">
       <el-table-column label="ID" prop="_id" width="230px"></el-table-column>
       <el-table-column label="英雄名称" prop="name"></el-table-column>
+      <el-table-column label="英雄称号" prop="title"></el-table-column>
       <el-table-column label="英雄图标" prop="avatar">
         <template slot-scope="scope">
           <img :src="scope.row.avatar" style="height: 3rem">
