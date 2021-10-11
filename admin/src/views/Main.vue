@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 12:40:31
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-07 21:38:25
+ * @LastEditTime: 2021-10-11 22:37:39
  * @FilePath: \admin\src\views\Main.vue
 -->
 <template>
@@ -27,6 +27,11 @@
             <template slot="title">英雄</template>
             <el-menu-item index="/heroes/create">新建英雄</el-menu-item>
             <el-menu-item index="/heroes/list">英雄列表</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group>
+            <template slot="title">文章</template>
+            <el-menu-item index="/articles/create">新建文章</el-menu-item>
+            <el-menu-item index="/articles/list">文章列表</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>

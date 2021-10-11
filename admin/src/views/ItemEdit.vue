@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 12:56:11
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-07 23:14:20
+ * @LastEditTime: 2021-10-11 22:41:46
  * @FilePath: \admin\src\views\ItemEdit.vue
 -->
 <template>
@@ -14,16 +14,6 @@
       :model="model"
       @submit.native.prevent="save"
     >
-      <!-- <el-form-item label="上级分类">
-        <el-select v-model="model.parent">
-          <el-option
-            v-for="item in parents"
-            :key="item._id"
-            :label="item.name"
-            :value="item._id"
-          ></el-option>
-        </el-select>
-      </el-form-item> -->
       <el-form-item label="名称">
         <el-input v-model="model.name"></el-input>
       </el-form-item>
