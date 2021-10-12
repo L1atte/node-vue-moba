@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 12:56:11
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-11 22:41:46
+ * @LastEditTime: 2021-10-13 00:51:34
  * @FilePath: \admin\src\views\ItemEdit.vue
 -->
 <template>
@@ -81,27 +81,4 @@ export default {
 </script>
 
 <style>
-.avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9;
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-.avatar-uploader .el-upload:hover {
-  border-color: #409eff;
-}
-.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 178px;
-  height: 178px;
-  line-height: 178px;
-  text-align: center;
-}
-.avatar {
-  width: 178px;
-  height: 178px;
-  display: block;
-}
 </style>

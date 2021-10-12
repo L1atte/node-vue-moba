@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 12:40:31
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-11 22:37:39
+ * @LastEditTime: 2021-10-12 23:23:51
  * @FilePath: \admin\src\views\Main.vue
 -->
 <template>
@@ -32,6 +32,11 @@
             <template slot="title">文章</template>
             <el-menu-item index="/articles/create">新建文章</el-menu-item>
             <el-menu-item index="/articles/list">文章列表</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group>
+            <template slot="title">广告位</template>
+            <el-menu-item index="/ads/create">新建广告位</el-menu-item>
+            <el-menu-item index="/ads/list">广告列表</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>

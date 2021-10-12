@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 11:16:09
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-11 22:44:29
+ * @LastEditTime: 2021-10-12 23:39:22
  * @FilePath: \admin\src\router\index.js
  */
 import Vue from "vue";
@@ -30,6 +30,7 @@ const routes = [
 				component: () => import("../views/CategoryEdit.vue"),
 				props: true,
 			},
+
 			{
 				path: "items/create",
 				component: () => import("../views/ItemEdit.vue"),
@@ -43,6 +44,7 @@ const routes = [
 				component: () => import("../views/ItemEdit.vue"),
 				props: true,
 			},
+
 			{
 				path: "heroes/create",
 				component: () => import("../views/HeroEdit.vue"),
@@ -56,6 +58,7 @@ const routes = [
 				component: () => import("../views/HeroEdit.vue"),
 				props: true,
 			},
+
 			{
 				path: "articles/create",
 				component: () => import("../views/ArticleEdit.vue"),
@@ -67,6 +70,20 @@ const routes = [
 			{
 				path: "articles/edit/:id",
 				component: () => import("../views/ArticleEdit.vue"),
+				props: true,
+			},
+			
+			{
+				path: "ads/create",
+				component: () => import("../views/AdEdit.vue"),
+			},
+			{
+				path: "ads/list",
+				component: () => import("../views/AdList.vue"),
+			},
+			{
+				path: "ads/edit/:id",
+				component: () => import("../views/AdEdit.vue"),
 				props: true,
 			},
 		],
