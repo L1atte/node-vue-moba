@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 11:16:09
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-12 23:39:22
+ * @LastEditTime: 2021-10-14 00:18:45
  * @FilePath: \admin\src\router\index.js
  */
 import Vue from "vue";
@@ -84,6 +84,20 @@ const routes = [
 			{
 				path: "ads/edit/:id",
 				component: () => import("../views/AdEdit.vue"),
+				props: true,
+			},
+
+			{
+				path: "admin_users/create",
+				component: () => import("../views/AdminUserEdit.vue"),
+			},
+			{
+				path: "admin_users/list",
+				component: () => import("../views/AdminUserList.vue"),
+			},
+			{
+				path: "admin_users/edit/:id",
+				component: () => import("../views/AdminUserEdit.vue"),
 				props: true,
 			},
 		],
