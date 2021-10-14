@@ -2,16 +2,22 @@
  * @Author: Latte
  * @Date: 2021-10-07 11:16:09
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-14 00:18:45
+ * @LastEditTime: 2021-10-14 23:14:33
  * @FilePath: \admin\src\router\index.js
  */
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Main from "../views/Main.vue";
+import Login from "../views/Login.vue"
 
 Vue.use(VueRouter);
 
 const routes = [
+	{
+		path: '/login',
+		name: 'login',
+		component: Login,
+	},
 	{
 		path: "/",
 		name: "main",

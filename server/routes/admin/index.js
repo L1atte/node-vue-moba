@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 14:04:00
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-08 22:54:37
+ * @LastEditTime: 2021-10-15 00:59:44
  * @FilePath: \server\routes\admin\index.js
  */
 module.exports = (app) => {
@@ -66,5 +66,35 @@ module.exports = (app) => {
 		const file = req.file; // 这里req.file是中间件upload.single的作用结果，类似于上面的req.Model
 		file.url = `http://localhost:3000/uploads/${file.filename}`;
 		res.send(file);
+	});
+
+	app.post("/admin/api/login", async (req, res) => {
+		const { username, password } = req.body;
+
+		// 1. 根据用户名查找用户
+		const AdminUser = require("../../models/AdminUser");
+		// 前缀 - 被排除， + 被强制选择
+		const user = await AdminUser.findOne({ username }).select("+password");
+		if (!user) {
+			return res.status(422).send({
+				message: "用户不存在",
+			});
+		}
+
+		// 2. 校验密码
+		const isPasswordValid = require("bcryptjs").compareSync(
+			req.body.password,
+			user.password
+		);
+		if (!isPasswordValid) {
+			return res.status(422).send({
+				message: "密码错误",
+			});
+		}
+
+		// 生成token
+		const jwt = require("jsonwebtoken");
+		const token = jwt.sign({ id: user._id }, app.get("secret"));
+		res.send({ token });
 	});
 };
