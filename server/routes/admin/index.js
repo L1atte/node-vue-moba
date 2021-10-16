@@ -2,11 +2,16 @@
  * @Author: Latte
  * @Date: 2021-10-07 14:04:00
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-15 00:59:44
+ * @LastEditTime: 2021-10-17 02:45:44
  * @FilePath: \server\routes\admin\index.js
  */
 module.exports = (app) => {
 	const express = require("express");
+	const jwt = require("jsonwebtoken");
+	const assert = require("http-assert");
+	const AdminUser = require("../../models/AdminUser");
+	const authMiddleware = require("../../middleware/auth")
+	const resourceMiddleware = require("../../middleware/resource")
 	const router = express.Router({
 		mergeParams: true, // 表示合并参数，把app.use里面的resource参数合并入route，即子路由继承父路由的参数
 	});
@@ -24,7 +29,7 @@ module.exports = (app) => {
 	});
 
 	// 获取列表
-	router.get("", async (req, res) => {
+	router.get("/", async (req, res) => {
 		const queryOptions = {};
 		if (req.Model.modelName === "Category") {
 			queryOptions.populate = "parent";
@@ -50,11 +55,8 @@ module.exports = (app) => {
 	// 通用CRUD路由
 	app.use(
 		"/admin/api/rest/:resource",
-		async (req, res, next) => {
-			const modelName = require("inflection").classify(req.params.resource); // 将路由参数转换成类名
-			req.Model = require(`../../models/${modelName}`);
-			next();
-		},
+		authMiddleware(),
+		resourceMiddleware(),
 		router
 	);
 
@@ -62,39 +64,41 @@ module.exports = (app) => {
 	const upload = multer({ dest: __dirname + "/../../uploads" }); // dirname表示绝对地址，在这里指当前admin文件夹所在路径
 
 	// 文件上传
-	app.post("/admin/api/upload", upload.single("file"), async (req, res) => {
-		const file = req.file; // 这里req.file是中间件upload.single的作用结果，类似于上面的req.Model
-		file.url = `http://localhost:3000/uploads/${file.filename}`;
-		res.send(file);
-	});
+	app.post(
+		"/admin/api/upload",
+		authMiddleware(),
+		upload.single("file"),
+		async (req, res) => {
+			const file = req.file; // 这里req.file是中间件upload.single的作用结果，类似于上面的req.Model
+			file.url = `http://localhost:3000/uploads/${file.filename}`;
+			res.send(file);
+		}
+	);
 
 	app.post("/admin/api/login", async (req, res) => {
 		const { username, password } = req.body;
 
 		// 1. 根据用户名查找用户
-		const AdminUser = require("../../models/AdminUser");
 		// 前缀 - 被排除， + 被强制选择
 		const user = await AdminUser.findOne({ username }).select("+password");
-		if (!user) {
-			return res.status(422).send({
-				message: "用户不存在",
-			});
-		}
+		assert(user, 422, "用户不存在");
 
 		// 2. 校验密码
 		const isPasswordValid = require("bcryptjs").compareSync(
 			req.body.password,
 			user.password
 		);
-		if (!isPasswordValid) {
-			return res.status(422).send({
-				message: "密码错误",
-			});
-		}
+		assert(isPasswordValid, 422, "密码错误");
 
 		// 生成token
-		const jwt = require("jsonwebtoken");
 		const token = jwt.sign({ id: user._id }, app.get("secret"));
 		res.send({ token });
+	});
+
+	// 错误处理函数
+	app.use(async (err, req, res, next) => {
+		res.status(err.statusCode || 500).send({
+			message: err.message,
+		});
 	});
 };
