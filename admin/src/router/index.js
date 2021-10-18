@@ -2,21 +2,24 @@
  * @Author: Latte
  * @Date: 2021-10-07 11:16:09
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-14 23:14:33
+ * @LastEditTime: 2021-10-17 10:26:50
  * @FilePath: \admin\src\router\index.js
  */
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Main from "../views/Main.vue";
-import Login from "../views/Login.vue"
+import Login from "../views/Login.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
 	{
-		path: '/login',
-		name: 'login',
+		path: "/login",
+		name: "login",
 		component: Login,
+		meta: {
+			isPublic: true,
+		},
 	},
 	{
 		path: "/",
@@ -78,7 +81,7 @@ const routes = [
 				component: () => import("../views/ArticleEdit.vue"),
 				props: true,
 			},
-			
+
 			{
 				path: "ads/create",
 				component: () => import("../views/AdEdit.vue"),
@@ -112,6 +115,13 @@ const routes = [
 
 const router = new VueRouter({
 	routes,
+});
+
+router.beforeEach((to, from, next) => {
+	if (!to.meta.isPublic && !sessionStorage.token) {
+		return next("/login");
+	}
+	next();
 });
 
 export default router;

@@ -1,0 +1,137 @@
+@import './variables';
+// reset
+* {
+	box-sizing: border-box;
+	outline: none;
+}
+
+html {
+	font-size: 13px;
+}
+
+body {
+	margin: 0;
+	// sans-serif表示非衬线字体
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: 1.2em;
+	background-color: #f1f1f1;
+	-webkit-font-smoothing: antialiased;
+}
+
+a {
+	color: #999;
+}
+
+// colors
+@each $colorKey, $color in $colors {
+  .text-#{$colorKey} {
+    color: $color;
+  }
+  .bg-#{$colorKey} {
+    background-color: $color;
+  }
+}
+
+// text align
+@each $var in (left, center, right) {
+	.text-#{$var} {
+		text-align: $var !important;
+	}
+}
+
+// font size
+@each $sizeKey, $size in $font-sizes {
+	.fs-#{$sizeKey} {
+		font-size: $size * $base-font-size;
+	}
+}
+
+// width, height
+.w-100 {
+	width: 100%;
+}
+.h-100 {
+	height: 100%;
+}
+
+// flex
+.d-flex {
+	display: flex;
+}
+.flex-column {
+	flex-direction: column;
+}
+.flex-wrap {
+	flex-wrap: wrap;
+}
+
+// justify-content
+@each $key, $value in $flex-jc {
+	.jc-#{$key} {
+		justify-content: $value;
+	}
+}
+
+// align-items
+
+@each $key, $value in flex-al {
+	.ai-#{$key} {
+		align-items: $value;
+	}
+}
+.flex-1 {
+	flex: 1;
+}
+.flex-grow-1 {
+	flex-grow: 1;
+}
+
+// spacing
+// m-0, mx-0
+@each $typeKey, $type in $spacing-types {
+	// .m-1
+	@each $sizeKey, $size in $spacing-sizes {
+		.#{$typeKey}-#{$sizeKey} {
+			#{$type}: $size * $spacing-base-size;
+		}
+	}
+	// .mx-1 , .my-1
+	@each $sizeKey, $size in $spacing-sizes {
+		.#{$typeKey}x-#{$sizeKey} {
+			#{$type}-left: $size * $spacing-base-size;
+			#{$type}-right: $size * $spacing-base-size;
+		}
+		.#{$typeKey}y-#{$sizeKey} {
+			#{$type}-top: $size * $spacing-base-size;
+			#{$type}-bottom: $size * $spacing-base-size;
+		}
+	}
+	// .mt-1
+	@each $directionKey, $direction in $spacing-directions {
+		@each $sizeKey, $size in $spacing-sizes {
+			.#{$typeKey}#{$directionKey}-#{$sizeKey} {
+				#{$type}-#{$direction}: $size * $spacing-base-size;
+			}
+		}
+	}
+}
+
+// button
+.btn {
+	border: none;
+	border-radius: 0.1538rem;
+	font-size: map-get($map: $font-sizes, $key: "sm") * $base-font-size;
+	padding: 0.2rem 0.6rem;
+}
+
+// nav
+.nav {
+	.nav-item {
+		border-bottom: 3px solid transparent;
+		padding-bottom: .2rem;
+		// &表示.nav-item本身，这里可以表示为 .nav-item .active两个并列的class
+		&.active {
+			border-bottom: 3px solid #fff;
+		}
+	}
+}

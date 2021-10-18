@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 12:56:11
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-13 00:51:34
+ * @LastEditTime: 2021-10-17 10:43:32
  * @FilePath: \admin\src\views\ItemEdit.vue
 -->
 <template>
@@ -20,7 +20,8 @@
       <el-form-item label="图标">
         <el-upload
           class="avatar-uploader"
-          :action="$http.defaults.baseURL + '/upload'"
+          :action="uploadUrl"
+          :headers="getAuthHeaders()"
           :show-file-list="false"
           :on-success="afterUpload"
         >
@@ -52,7 +53,7 @@ export default {
   methods: {
     afterUpload(res) {
       console.log(res);
-      this.$set(this.model, 'icon', res.url)
+      this.$set(this.model, "icon", res.url);
       // this.model.icon = res.url
     },
     async save() {
