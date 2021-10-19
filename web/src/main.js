@@ -11,6 +11,7 @@ import router from "./router";
 import "./assets/scss/style.scss";
 import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
+import './assets/iconfont/iconfont.css'
 
 Vue.config.productionTip = false;
 Vue.use(VueAwesomeSwiper /* { default options with global component } */);

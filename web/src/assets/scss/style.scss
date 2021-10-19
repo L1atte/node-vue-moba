@@ -107,13 +107,13 @@ a {
 		}
 	}
 	// .mt-1
-	@each $directionKey, $direction in $spacing-directions {
-		@each $sizeKey, $size in $spacing-sizes {
-			.#{$typeKey}#{$directionKey}-#{$sizeKey} {
-				#{$type}-#{$direction}: $size * $spacing-base-size;
-			}
-		}
-	}
+  @each $directionKey, $direction in $spacing-directions {
+    @each $sizeKey, $size in $spacing-sizes {
+      .#{$typeKey}#{$directionKey}-#{$sizeKey} {
+        #{$type}-#{$direction}: $size * $spacing-base-size;
+      }
+    }
+  }
 }
 
 // button
