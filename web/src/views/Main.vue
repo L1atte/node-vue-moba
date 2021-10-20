@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-18 22:44:06
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-18 23:53:14
+ * @LastEditTime: 2021-10-20 23:51:39
  * @FilePath: \web\src\views\Main.vue
 -->
 <template>
@@ -17,7 +17,7 @@
     </div>
 
     <div class="bg-primary pt-3 pb-2">
-      <div class="nav d-flex text-white jc-around pb-1">
+      <div class="nav nav-inverse text-white pb-1 jc-around">
         <div class="nav-item active">
           <router-link class="nav-link" to="/">首页</router-link>
         </div>

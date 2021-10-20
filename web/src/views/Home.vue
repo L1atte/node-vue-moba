@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 11:08:16
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-20 00:46:34
+ * @LastEditTime: 2021-10-21 00:39:08
  * @FilePath: \web\src\views\Home.vue
 -->
 <template>
@@ -45,7 +45,69 @@
       </div>
     </div>
     <!-- end of nav icons -->
-    <i class="iconfont icon-cc-menu-circle"></i>
+    <m-card icon="cc-menu-circle" title="新闻资讯">
+      <div class="nav jc-between">
+        <div class="nav-item active">
+          <div class="nav-link">热门</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-link">新闻</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-link">新闻</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-link">新闻</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-link">新闻</div>
+        </div>
+      </div>
+      <div class="pt-3">
+        <swiper>
+          <swiper-slide v-for="n in 5" :key="n">
+            <div class="py-2" v-for="m in 5" :key="m">
+              <span>[公告]</span>
+              <span>|</span>
+              <span>王者荣耀×完美日记 峡谷四美眼影系列新品来啦</span>
+              <span>06/02</span>
+            </div>
+          </swiper-slide>
+        </swiper>
+      </div>
+    </m-card>
+
+    <m-card icon="cc-menu-circle" title="英雄列表">
+      <div class="nav jc-between">
+        <div class="nav-item active">
+          <div class="nav-link">热门</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-link">新闻</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-link">新闻</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-link">新闻</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-link">新闻</div>
+        </div>
+      </div>
+      <div class="pt-3">
+        <swiper>
+          <swiper-slide v-for="n in 5" :key="n">
+            <div class="py-2" v-for="m in 5" :key="m">
+              <span>[公告]</span>
+              <span>|</span>
+              <span>王者荣耀×完美日记 峡谷四美眼影系列新品来啦</span>
+              <span>06/02</span>
+            </div>
+          </swiper-slide>
+        </swiper>
+      </div>
+    </m-card>
   </div>
 </template>
 

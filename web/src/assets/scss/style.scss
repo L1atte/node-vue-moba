@@ -1,4 +1,4 @@
-@import './variables';
+@import "./variables";
 // reset
 * {
 	box-sizing: border-box;
@@ -24,12 +24,12 @@ a {
 
 // colors
 @each $colorKey, $color in $colors {
-  .text-#{$colorKey} {
-    color: $color;
-  }
-  .bg-#{$colorKey} {
-    background-color: $color;
-  }
+	.text-#{$colorKey} {
+		color: $color;
+	}
+	.bg-#{$colorKey} {
+		background-color: $color;
+	}
 }
 
 // text align
@@ -107,13 +107,13 @@ a {
 		}
 	}
 	// .mt-1
-  @each $directionKey, $direction in $spacing-directions {
-    @each $sizeKey, $size in $spacing-sizes {
-      .#{$typeKey}#{$directionKey}-#{$sizeKey} {
-        #{$type}-#{$direction}: $size * $spacing-base-size;
-      }
-    }
-  }
+	@each $directionKey, $direction in $spacing-directions {
+		@each $sizeKey, $size in $spacing-sizes {
+			.#{$typeKey}#{$directionKey}-#{$sizeKey} {
+				#{$type}-#{$direction}: $size * $spacing-base-size;
+			}
+		}
+	}
 }
 
 // button
@@ -126,12 +126,23 @@ a {
 
 // nav
 .nav {
+	display: flex;
 	.nav-item {
 		border-bottom: 3px solid transparent;
-		padding-bottom: .2rem;
+		padding-bottom: 0.2rem;
+
 		// &表示.nav-item本身，这里可以表示为 .nav-item .active两个并列的class
 		&.active {
-			border-bottom: 3px solid #fff;
+			color: map-get($map: $colors, $key: "primary");
+			border-bottom-color: map-get($map: $colors, $key: "primary");
+		}
+	}
+	&.nav-inverse {
+		.nav-item {
+			color: map-get($map: $colors, $key: 'white');
+			&.active {
+				border-bottom-color: map-get($map: $colors, $key: 'white');;
+			}
 		}
 	}
 }
