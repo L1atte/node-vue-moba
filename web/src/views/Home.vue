@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 11:08:16
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-21 00:39:08
+ * @LastEditTime: 2021-10-26 23:26:27
  * @FilePath: \web\src\views\Home.vue
 -->
 <template>
@@ -45,69 +45,21 @@
       </div>
     </div>
     <!-- end of nav icons -->
-    <m-card icon="cc-menu-circle" title="新闻资讯">
-      <div class="nav jc-between">
-        <div class="nav-item active">
-          <div class="nav-link">热门</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-      </div>
-      <div class="pt-3">
-        <swiper>
-          <swiper-slide v-for="n in 5" :key="n">
-            <div class="py-2" v-for="m in 5" :key="m">
-              <span>[公告]</span>
-              <span>|</span>
-              <span>王者荣耀×完美日记 峡谷四美眼影系列新品来啦</span>
-              <span>06/02</span>
-            </div>
-          </swiper-slide>
-        </swiper>
-      </div>
-    </m-card>
 
-    <m-card icon="cc-menu-circle" title="英雄列表">
-      <div class="nav jc-between">
-        <div class="nav-item active">
-          <div class="nav-link">热门</div>
+    <m-list-card icon="cc-menu-circle" title="新闻资讯" :categories="newsCats">
+      <template #items="{ category }">
+        <div
+          class="py-2"
+          v-for="(news, index) in category.newsList"
+          :key="index"
+        >
+          <span>[{{ news.categoryName }}]</span>
+          <span>|</span>
+          <span>{{ news.title }}</span>
+          <span>{{ news.date }}</span>
         </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-      </div>
-      <div class="pt-3">
-        <swiper>
-          <swiper-slide v-for="n in 5" :key="n">
-            <div class="py-2" v-for="m in 5" :key="m">
-              <span>[公告]</span>
-              <span>|</span>
-              <span>王者荣耀×完美日记 峡谷四美眼影系列新品来啦</span>
-              <span>06/02</span>
-            </div>
-          </swiper-slide>
-        </swiper>
-      </div>
-    </m-card>
+      </template>
+    </m-list-card>
   </div>
 </template>
 
@@ -120,6 +72,48 @@ export default {
           el: ".pagination-home",
         },
       },
+      newsCats: [
+        {
+          name: "热门",
+          newsList: new Array(5).fill({}).map((v) => ({
+            categoryName: "公告",
+            title: "王者荣耀×完美日记 峡谷四美眼影系列新品来啦",
+            date: "06/02",
+          })),
+        },
+        {
+          name: "新闻",
+          newsList: new Array(5).fill({}).map((v) => ({
+            categoryName: "公1告",
+            title: "王者荣耀×完美日记 峡谷四美眼影系列新品来啦",
+            date: "06/02",
+          })),
+        },
+        {
+          name: "公告",
+          newsList: new Array(5).fill({}).map((v) => ({
+            categoryName: "公2告",
+            title: "王者荣耀×完美日记 峡谷四美眼影系列新品来啦",
+            date: "06/02",
+          })),
+        },
+        {
+          name: "活动",
+          newsList: new Array(5).fill({}).map((v) => ({
+            categoryName: "公3告",
+            title: "王者荣耀×完美日记 峡谷四美眼影系列新品来啦",
+            date: "06/02",
+          })),
+        },
+        {
+          name: "赛事",
+          newsList: new Array(5).fill({}).map((v) => ({
+            categoryName: "公4告",
+            title: "王者荣耀×完美日记 峡谷四美眼影系列新品来啦",
+            date: "06/02",
+          })),
+        },
+      ],
     };
   },
 };
