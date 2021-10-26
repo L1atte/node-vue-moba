@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 12:40:31
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-14 00:27:44
+ * @LastEditTime: 2021-10-26 23:33:56
  * @FilePath: \admin\src\views\Main.vue
 -->
 <template>
@@ -67,7 +67,8 @@
       <el-header style="text-align: right; font-size: 12px"> </el-header>
 
       <el-main>
-        <router-view></router-view>
+        <!-- 修复页面跳转不重新渲染的bug -->
+        <router-view :key="$route.path"></router-view>
       </el-main>
     </el-container>
   </el-container>
