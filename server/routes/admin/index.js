@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 14:04:00
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-17 02:45:44
+ * @LastEditTime: 2021-10-26 23:45:23
  * @FilePath: \server\routes\admin\index.js
  */
 module.exports = (app) => {
@@ -34,7 +34,7 @@ module.exports = (app) => {
 		if (req.Model.modelName === "Category") {
 			queryOptions.populate = "parent";
 		}
-		const items = await req.Model.find().setOptions(queryOptions).limit(10);
+		const items = await req.Model.find().setOptions(queryOptions).limit(100);
 		res.send(items);
 	});
 

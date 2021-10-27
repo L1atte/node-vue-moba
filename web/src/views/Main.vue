@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-18 22:44:06
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-20 23:51:39
+ * @LastEditTime: 2021-10-26 23:43:31
  * @FilePath: \web\src\views\Main.vue
 -->
 <template>
@@ -38,5 +38,10 @@
 export default {};
 </script>
 
-<style>
+<style lang="scss">
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
 </style>
