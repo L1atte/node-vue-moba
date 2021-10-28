@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 11:08:16
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-26 23:26:27
+ * @LastEditTime: 2021-10-29 00:17:15
  * @FilePath: \web\src\views\Home.vue
 -->
 <template>
@@ -49,14 +49,14 @@
     <m-list-card icon="cc-menu-circle" title="新闻资讯" :categories="newsCats">
       <template #items="{ category }">
         <div
-          class="py-2"
+          class="py-2 fs-lg d-flex"
           v-for="(news, index) in category.newsList"
           :key="index"
         >
-          <span>[{{ news.categoryName }}]</span>
-          <span>|</span>
-          <span>{{ news.title }}</span>
-          <span>{{ news.date }}</span>
+          <span class="text-info">[{{ news.categoryName }}]</span>
+          <span class="px-2">|</span>
+          <span class="flex-1 text-dark-1 text-ellipsis pr-2">{{ news.title }}</span>
+          <span class="text-grey-1">{{ news.createdAt | date }}</span>
         </div>
       </template>
     </m-list-card>
@@ -64,7 +64,13 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
 export default {
+  filters: {
+    date(val) {
+      return dayjs(val).format('MM/DD')
+    }
+  },
   data() {
     return {
       swiperOptions: {
@@ -72,49 +78,17 @@ export default {
           el: ".pagination-home",
         },
       },
-      newsCats: [
-        {
-          name: "热门",
-          newsList: new Array(5).fill({}).map((v) => ({
-            categoryName: "公告",
-            title: "王者荣耀×完美日记 峡谷四美眼影系列新品来啦",
-            date: "06/02",
-          })),
-        },
-        {
-          name: "新闻",
-          newsList: new Array(5).fill({}).map((v) => ({
-            categoryName: "公1告",
-            title: "王者荣耀×完美日记 峡谷四美眼影系列新品来啦",
-            date: "06/02",
-          })),
-        },
-        {
-          name: "公告",
-          newsList: new Array(5).fill({}).map((v) => ({
-            categoryName: "公2告",
-            title: "王者荣耀×完美日记 峡谷四美眼影系列新品来啦",
-            date: "06/02",
-          })),
-        },
-        {
-          name: "活动",
-          newsList: new Array(5).fill({}).map((v) => ({
-            categoryName: "公3告",
-            title: "王者荣耀×完美日记 峡谷四美眼影系列新品来啦",
-            date: "06/02",
-          })),
-        },
-        {
-          name: "赛事",
-          newsList: new Array(5).fill({}).map((v) => ({
-            categoryName: "公4告",
-            title: "王者荣耀×完美日记 峡谷四美眼影系列新品来啦",
-            date: "06/02",
-          })),
-        },
-      ],
+      newsCats: [],
     };
+  },
+  created() {
+    this.fetchNewsList()
+  },
+  methods: {
+    async fetchNewsList() {
+      const res = await this.$http.get('news/list')
+      this.newsCats = res.data
+    }
   },
 };
 </script>

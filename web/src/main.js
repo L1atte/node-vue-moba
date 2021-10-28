@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 11:08:16
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-22 00:32:32
+ * @LastEditTime: 2021-10-28 23:20:22
  * @FilePath: \web\src\main.js
  */
 import Vue from "vue";
@@ -22,6 +22,10 @@ Vue.component("m-card", Card);
 
 import ListCard from "./components/ListCard.vue";
 Vue.component("m-list-card", ListCard);
+
+// 挂载axios
+import http from "./http";
+Vue.prototype.$http = http;
 
 new Vue({
 	router,

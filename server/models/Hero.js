@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-08 22:37:55
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-09 00:02:53
+ * @LastEditTime: 2021-10-29 01:08:05
  * @FilePath: \server\models\Hero.js
  */
 const mongoose = require("mongoose");
@@ -39,4 +39,4 @@ const schema = new mongoose.Schema({
 	],
 });
 
-module.exports = mongoose.model("Hero", schema);
+module.exports = mongoose.model("Hero", schema, 'heroes');
