@@ -9,6 +9,7 @@ $colors: (
 	"grey": #999,
 	"light": #f9f9f9,
 	"info": #4b67af,
+	"blue": #4394e4,
 	"light-1": #d4d9de,
 );
 $border-color: map-get($map: $colors, $key: 'light-1');

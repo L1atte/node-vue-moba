@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-22 00:23:41
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-28 23:55:02
+ * @LastEditTime: 2021-10-31 18:00:49
  * @FilePath: \web\src\components\ListCard.vue
 -->
 <template>
@@ -22,6 +22,7 @@
       <swiper
         ref="list"
         @slide-change="() => (active = $refs.list.$swiper.activeIndex)"
+        :options="{ autoHeight: true }"
       >
         <swiper-slide v-for="(category, i) in categories" :key="i">
           <slot name="items" :category="category"></slot>

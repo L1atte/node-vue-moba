@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-27 00:03:20
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-29 01:15:42
+ * @LastEditTime: 2021-11-01 01:11:29
  * @FilePath: \server\routes\web\index.js
  */
 module.exports = (app) => {
@@ -63,6 +63,7 @@ module.exports = (app) => {
 				},
 			},
 			{
+				// 实现修改字段的功能，只取newsList的五个数据
 				$addFields: {
 					newsList: { $slice: ["$newsList", 5] },
 				},
@@ -664,6 +665,52 @@ module.exports = (app) => {
 			await Hero.insertMany(cat.heroes);
 		}
 		res.send(await Hero.find());
+	});
+
+	// 英雄列表接口
+	router.get("/heroes/list", async (req, res) => {
+		const parent = await Category.findOne({
+			name: "英雄分类",
+		});
+		// 聚合查询aggregate: 在一次查询内执行多次查询
+		const cats = await Category.aggregate([
+			{ $match: { parent: parent._id } },
+			{
+				// 关联查询，类似于关系型数据的 join，可以用当前查询结果去查询另外一个集合
+				$lookup: {
+					from: "heroes", // form表示关联哪个集合，集合名称默认为对应的模型名称的小写复数。因为数据库创建的时候会默认将文档名设置为复数。这里是 articles 对应的 Article 模型
+					localField: "_id", // 本地键
+					foreignField: "categories", // 外键
+					as: "heroList", // 为输出文档的新增值命名。如果输入的集合中已存在该值，则会覆盖掉，
+				},
+			},
+		]);
+
+		const subCats = cats.map((v) => v._id);
+		cats.unshift({
+			name: "热门",
+			heroList: await Hero.find()
+				.where({
+					categories: { $in: subCats },
+				})
+				.limit(10)
+				.lean(),
+		});
+
+		res.send(cats);
+	});
+
+	// 文章详情
+	// mongodb 不等于查询语句$ne、范围包含in语句$in
+	router.get("/articles/:id", async (req, res) => {
+		const data = await Article.findById(req.params.id).lean();
+		data.related = await Article.find()
+			.where({
+				categories: { $in: data.categories },
+				title: { $ne: data.title },
+			})
+			.limit(2);
+		res.send(data);
 	});
 
 	// web api路径

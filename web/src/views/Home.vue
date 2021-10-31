@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 11:08:16
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-29 00:17:15
+ * @LastEditTime: 2021-10-31 19:59:00
  * @FilePath: \web\src\views\Home.vue
 -->
 <template>
@@ -48,15 +48,35 @@
 
     <m-list-card icon="cc-menu-circle" title="新闻资讯" :categories="newsCats">
       <template #items="{ category }">
-        <div
+        <router-link
+          tag="div"
+          :to="`/article/${news._id}`"
           class="py-2 fs-lg d-flex"
           v-for="(news, index) in category.newsList"
           :key="index"
         >
           <span class="text-info">[{{ news.categoryName }}]</span>
           <span class="px-2">|</span>
-          <span class="flex-1 text-dark-1 text-ellipsis pr-2">{{ news.title }}</span>
+          <span class="flex-1 text-dark-1 text-ellipsis pr-2">{{
+            news.title
+          }}</span>
           <span class="text-grey-1">{{ news.createdAt | date }}</span>
+        </router-link>
+      </template>
+    </m-list-card>
+
+    <m-list-card icon="card-hero" title="英雄列表" :categories="heroCats">
+      <template #items="{ category }">
+        <div class="d-flex flex-wrap" style="margin: 0 -0.5rem">
+          <div
+            class="p-2 text-center"
+            style="width: 20%;"
+            v-for="(hero, index) in category.heroList"
+            :key="index"
+          >
+            <img class="w-100" :src="hero.avatar" alt="" />
+            <div>{{ hero.name }}</div>
+          </div>
         </div>
       </template>
     </m-list-card>
@@ -64,12 +84,12 @@
 </template>
 
 <script>
-import dayjs from 'dayjs'
+import dayjs from "dayjs";
 export default {
   filters: {
     date(val) {
-      return dayjs(val).format('MM/DD')
-    }
+      return dayjs(val).format("MM/DD");
+    },
   },
   data() {
     return {
@@ -79,16 +99,22 @@ export default {
         },
       },
       newsCats: [],
+      heroCats: [],
     };
   },
   created() {
-    this.fetchNewsList()
+    this.fetchNewsList();
+    this.fetchHeroesList();
   },
   methods: {
     async fetchNewsList() {
-      const res = await this.$http.get('news/list')
-      this.newsCats = res.data
-    }
+      const res = await this.$http.get("news/list");
+      this.newsCats = res.data;
+    },
+    async fetchHeroesList() {
+      const res = await this.$http.get("heroes/list");
+      this.heroCats = res.data;
+    },
   },
 };
 </script>
