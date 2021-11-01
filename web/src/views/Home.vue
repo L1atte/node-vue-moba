@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-07 11:08:16
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-31 19:59:00
+ * @LastEditTime: 2021-11-01 23:17:45
  * @FilePath: \web\src\views\Home.vue
 -->
 <template>
@@ -50,7 +50,7 @@
       <template #items="{ category }">
         <router-link
           tag="div"
-          :to="`/article/${news._id}`"
+          :to="`/articles/${news._id}`"
           class="py-2 fs-lg d-flex"
           v-for="(news, index) in category.newsList"
           :key="index"
@@ -68,15 +68,17 @@
     <m-list-card icon="card-hero" title="英雄列表" :categories="heroCats">
       <template #items="{ category }">
         <div class="d-flex flex-wrap" style="margin: 0 -0.5rem">
-          <div
+          <router-link
+            tag="div"
+            :to="`/heroes/${hero._id}`"
             class="p-2 text-center"
-            style="width: 20%;"
+            style="width: 20%"
             v-for="(hero, index) in category.heroList"
             :key="index"
           >
             <img class="w-100" :src="hero.avatar" alt="" />
             <div>{{ hero.name }}</div>
-          </div>
+          </router-link>
         </div>
       </template>
     </m-list-card>

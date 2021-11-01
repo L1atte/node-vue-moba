@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-31 19:49:58
  * @LAstEditors: Latte
- * @LastEditTime: 2021-11-01 01:15:51
+ * @LastEditTime: 2021-11-01 23:01:20
  * @FilePath: \web\src\views\Article.vue
 -->
 <template>
@@ -44,9 +44,9 @@ export default {
   watch: {
     // id 变化后触发this.fetch()
     id() {
-      this.fetch()
-    }
-  }
+      this.fetch();
+    },
+  },
   created() {
     this.fetch();
   },

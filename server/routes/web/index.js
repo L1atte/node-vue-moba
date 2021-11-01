@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-27 00:03:20
  * @LAstEditors: Latte
- * @LastEditTime: 2021-11-01 01:11:29
+ * @LastEditTime: 2021-11-01 23:28:08
  * @FilePath: \server\routes\web\index.js
  */
 module.exports = (app) => {
@@ -710,6 +710,12 @@ module.exports = (app) => {
 				title: { $ne: data.title },
 			})
 			.limit(2);
+		res.send(data);
+	});
+
+	// 英雄详情
+	router.get("/heroes/:id", async (req, res) => {
+		const data = await Hero.findById(req.params.id).lean();
 		res.send(data);
 	});
 

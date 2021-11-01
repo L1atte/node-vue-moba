@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-08 22:37:55
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-29 01:08:05
+ * @LastEditTime: 2021-11-02 00:06:46
  * @FilePath: \server\models\Hero.js
  */
 const mongoose = require("mongoose");
@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 const schema = new mongoose.Schema({
 	name: { type: String },
 	avatar: { type: String },
+	banner: { type: String },
 	title: { type: String },
 	categories: [{ type: mongoose.SchemaTypes.ObjectId, ref: "Category" }],
 	scores: {
@@ -22,6 +23,8 @@ const schema = new mongoose.Schema({
 		{
 			icon: { type: String },
 			name: { type: String },
+			delay: { type: String },
+			cost: { type: String },
 			description: { type: String },
 			tips: { type: String },
 		},
@@ -39,4 +42,4 @@ const schema = new mongoose.Schema({
 	],
 });
 
-module.exports = mongoose.model("Hero", schema, 'heroes');
+module.exports = mongoose.model("Hero", schema, "heroes");
