@@ -134,6 +134,15 @@ p {
 	border-radius: 0.1538rem;
 	font-size: map-get($map: $font-sizes, $key: "sm") * $base-font-size;
 	padding: 0.2rem 0.6rem;
+	&.btn-lg {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: map-get($map: $colors, $key: 'light');
+		border: 1px solid map-get($map: $colors, $key: 'light');
+		padding: 0.8rem 1rem;
+		font-size: 1rem;
+	}
 }
 
 // nav

@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-21 00:24:27
  * @LAstEditors: Latte
- * @LastEditTime: 2021-10-21 00:38:36
+ * @LastEditTime: 2021-11-04 23:11:37
  * @FilePath: \web\src\components\Card.vue
 -->
 <template>
@@ -10,7 +10,7 @@
     <div class="card-header d-flex ai-center pb-3">
       <i class="iconfont" :class="`icon-${icon}`"></i>
       <div class="fs-xl flex-1 px-2">{{ title }}</div>
-      <i class="iconfont icon-sangediandian"></i>
+      <i class="iconfont icon-sangediandian" v-if="!plain"></i>
     </div>
     <div class="card-body pt-3">
       <slot></slot>
@@ -29,6 +29,10 @@ export default {
       type: String,
       required: true,
     },
+    plain: {
+      type: Boolean,
+      default: false,
+    }
   },
 };
 </script>

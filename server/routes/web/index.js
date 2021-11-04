@@ -2,7 +2,7 @@
  * @Author: Latte
  * @Date: 2021-10-27 00:03:20
  * @LAstEditors: Latte
- * @LastEditTime: 2021-11-01 23:28:08
+ * @LastEditTime: 2021-11-04 23:06:55
  * @FilePath: \server\routes\web\index.js
  */
 module.exports = (app) => {
@@ -715,7 +715,9 @@ module.exports = (app) => {
 
 	// 英雄详情
 	router.get("/heroes/:id", async (req, res) => {
-		const data = await Hero.findById(req.params.id).lean();
+		const data = await Hero.findById(req.params.id)
+			.populate("categories items1 items2 partners.hero")
+			.lean();
 		res.send(data);
 	});
 
